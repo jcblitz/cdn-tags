@@ -1,0 +1,3 @@
+h2. What is this?
+
+This is my attempt to create a library to integrate CDN served assets without having to have knowledge of the CDN itself
