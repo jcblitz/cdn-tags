@@ -5,95 +5,48 @@
 package com.louderthanreason.cdntags;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.Tag;
-import org.apache.commons.lang.StringUtils;
+import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.tagext.BodyContent;
+import javax.servlet.jsp.tagext.BodyTagSupport;
+import nu.xom.Attribute;
+import nu.xom.Builder;
+import nu.xom.Document;
+import nu.xom.Element;
+import nu.xom.ParsingException;
 
 /**
  *
  * @author jared
  */
-public class CdnModifyTag implements Tag, Serializable {
+public class CdnModifyTag extends BodyTagSupport {
 
-    private String id;
-    private String name;
-    private String src;
+    private String cdnBaseUrl = "http://i.imgur.com/";
 
-    public String getSrc() {
-        return src;
-    }
+    @Override
+    public int doAfterBody() throws JspTagException {
+        BodyContent bc = getBodyContent();
+        String body = bc.getString().trim();
+        bc.clearBody();
 
-    public void setSrc(String src) {
-        this.src = src;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    private PageContext pc = null;
-    private Tag parent = null;
-
-    public void setPageContext(PageContext pc) {
-        this.pc = pc;
-    }
-
-    public void setParent(Tag t) {
-        this.parent = t;
-    }
-
-    public Tag getParent() {
-        return parent;
-    }
-
-    public int doStartTag() throws JspException {
-        StringBuilder image = new StringBuilder();
-
-        image.append("<img ");
-
-        if (StringUtils.isNotBlank(id)) {
-            image.append(" id=\"" + id + "\" ");
-        }
-
-        image.append(" src=\"" + getCdnSrc(src) + "\" ");
-
-        image.append("/>");
 
 
         try {
-            pc.getOut().write(image.toString());
-        } catch (IOException ex) {
-            Logger.getLogger(CdnTag.class.getName()).log(Level.SEVERE, null, ex);
+            Element img = modifySrcAttribute(body);
+            getPreviousOut().print(img.toXML());
+        } catch (Exception ex) {
+            Logger.getLogger(CdnModifyTag.class.getName()).log(Level.SEVERE, null, ex);
         }
         return SKIP_BODY;
     }
 
-    public int doEndTag() throws JspException {
-        return EVAL_PAGE;
-    }
-
-    public void release() {
-        pc = null;
-        parent = null;
-        name = null;
-    }
-
-    private String getCdnSrc(String src) {
-        return "http://i.imgur.com/" + src;
+    private Element modifySrcAttribute(String body) throws ParsingException, IOException {
+        Document bodyDocument = new Builder().build(body, "");
+        Element img = bodyDocument.getRootElement();
+        Attribute src = img.getAttribute("src");
+        String cdn = cdnBaseUrl + src.getValue().replaceAll("/images/", "");
+        src.setValue(cdn);
+        return img;
     }
 }

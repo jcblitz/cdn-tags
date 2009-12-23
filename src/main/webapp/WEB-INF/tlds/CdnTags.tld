@@ -3,53 +3,40 @@
 "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
 
 <taglib>
-	<tlibversion>1.0</tlibversion>
-	<jspversion>1.1</jspversion>
-	<shortname>CdnTags</shortname>
-	<uri>http://www.stardeveloper.com</uri>
-	<info>Demo Tags Library</info>
+    <tlibversion>1.0</tlibversion>
+    <jspversion>1.1</jspversion>
+    <shortname>CdnTags</shortname>
+    <uri>http://www.stardeveloper.com</uri>
+    <info>Demo Tags Library</info>
 
-	<tag>
-		<name>img</name>
-		<tagclass>com.louderthanreason.cdntags.CdnTag</tagclass>
-		<bodycontent>empty</bodycontent>
-		<info>Your first JSP Tag</info>
+    <tag>
+        <name>img</name>
+        <tagclass>com.louderthanreason.cdntags.CdnTag</tagclass>
+        <bodycontent>empty</bodycontent>
+        <info>Your first JSP Tag</info>
 
-		<attribute>
-			<name>name</name>
-			<required>false</required>
-		</attribute>
+        <attribute>
+            <name>name</name>
+            <required>false</required>
+        </attribute>
 
-                <attribute>
-			<name>id</name>
-			<required>false</required>
-		</attribute>
+        <attribute>
+            <name>id</name>
+            <required>false</required>
+        </attribute>
 
-                <attribute>
-			<name>src</name>
-			<required>true</required>
-		</attribute>
-	</tag>
+        <attribute>
+            <name>src</name>
+            <required>true</required>
+        </attribute>
+    </tag>
 
-        <tag>
-		<name>modify</name>
-		<tagclass>com.louderthanreason.cdntags.CdnModifyTag</tagclass>
-		<bodycontent>empty</bodycontent>
-		<info>Your first JSP Tag</info>
+    <tag>
+        <name>modify</name>
+        <tagclass>com.louderthanreason.cdntags.CdnModifyTag</tagclass>
+        <bodycontent>JSP</bodycontent>
+        <info>Your first JSP Tag</info>
 
-		<attribute>
-			<name>name</name>
-			<required>false</required>
-		</attribute>
-
-                <attribute>
-			<name>id</name>
-			<required>false</required>
-		</attribute>
-
-                <attribute>
-			<name>src</name>
-			<required>true</required>
-		</attribute>
-	</tag>
+        
+    </tag>
 </taglib>

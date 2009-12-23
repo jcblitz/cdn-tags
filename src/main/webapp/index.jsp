@@ -1,23 +1,22 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="/WEB-INF/tlds/CdnTags.tld" prefix="cdn" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>
+            CDN Test
+        </title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-
         <p>
             <cdn:img id="product-image" src="/Y3HU2.jpg" />
         </p>
 
         <p>
             <cdn:modify>
-                <img src="OfkKz.jpg" id="second" />
+                <img src="/images/OfkKz.jpg" id="second" />
             </cdn:modify>
         </p>
     </body>
